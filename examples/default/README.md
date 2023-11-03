@@ -31,7 +31,9 @@ No providers.
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_gitlab_group"></a> [gitlab\_group](#module\_gitlab\_group) | ../../ | n/a |
 
 ## Resources
 
@@ -43,5 +45,12 @@ No inputs.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_gitlab_group_avatar_url"></a> [gitlab\_group\_avatar\_url](#output\_gitlab\_group\_avatar\_url) | The URL of the avatar image |
+| <a name="output_gitlab_group_full_name"></a> [gitlab\_group\_full\_name](#output\_gitlab\_group\_full\_name) | The full name of the group |
+| <a name="output_gitlab_group_full_path"></a> [gitlab\_group\_full\_path](#output\_gitlab\_group\_full\_path) | The full path of the group |
+| <a name="output_gitlab_group_id"></a> [gitlab\_group\_id](#output\_gitlab\_group\_id) | The ID of this resource |
+| <a name="output_gitlab_group_runners_token"></a> [gitlab\_group\_runners\_token](#output\_gitlab\_group\_runners\_token) | The group level registration token to use during runner setup |
+| <a name="output_gitlab_group_web_url"></a> [gitlab\_group\_web\_url](#output\_gitlab\_group\_web\_url) | Web URL of the group |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
