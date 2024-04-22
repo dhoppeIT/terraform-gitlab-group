@@ -43,10 +43,10 @@ variable "description" {
   description = "The group's description"
 }
 
-variable "emails_disabled" {
+variable "emails_enabled" {
   type        = bool
-  default     = false
-  description = "Disable email notifications"
+  default     = true
+  description = "Enable email notifications"
 }
 
 variable "extra_shared_runners_minutes_limit" {

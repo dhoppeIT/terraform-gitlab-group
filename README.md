@@ -25,13 +25,13 @@ module "gitlab_group" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_gitlab"></a> [gitlab](#requirement\_gitlab) | ~> 16.0 |
+| <a name="requirement_gitlab"></a> [gitlab](#requirement\_gitlab) | ~> 16.11 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_gitlab"></a> [gitlab](#provider\_gitlab) | ~> 16.0 |
+| <a name="provider_gitlab"></a> [gitlab](#provider\_gitlab) | ~> 16.11 |
 
 ## Modules
 
@@ -52,7 +52,7 @@ No modules.
 | <a name="input_avatar_hash"></a> [avatar\_hash](#input\_avatar\_hash) | The hash of the avatar image | `string` | `null` | no |
 | <a name="input_default_branch_protection"></a> [default\_branch\_protection](#input\_default\_branch\_protection) | See https://docs.gitlab.com/ee/api/groups.html#options-for-default_branch_protection | `number` | `2` | no |
 | <a name="input_description"></a> [description](#input\_description) | The group's description | `string` | `null` | no |
-| <a name="input_emails_disabled"></a> [emails\_disabled](#input\_emails\_disabled) | Disable email notifications | `bool` | `false` | no |
+| <a name="input_emails_enabled"></a> [emails\_enabled](#input\_emails\_enabled) | Enable email notifications | `bool` | `true` | no |
 | <a name="input_extra_shared_runners_minutes_limit"></a> [extra\_shared\_runners\_minutes\_limit](#input\_extra\_shared\_runners\_minutes\_limit) | Additional CI/CD minutes for this group | `number` | `null` | no |
 | <a name="input_ip_restriction_ranges"></a> [ip\_restriction\_ranges](#input\_ip\_restriction\_ranges) | A list of IP addresses or subnet masks to restrict group access | `list(string)` | `[]` | no |
 | <a name="input_lfs_enabled"></a> [lfs\_enabled](#input\_lfs\_enabled) | Enable/disable Large File Storage (LFS) for the projects in this group | `bool` | `true` | no |

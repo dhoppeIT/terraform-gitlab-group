@@ -6,7 +6,7 @@ resource "gitlab_group" "this" {
   avatar_hash                        = var.avatar_hash
   default_branch_protection          = var.default_branch_protection
   description                        = var.description
-  emails_disabled                    = var.emails_disabled
+  emails_enabled                     = var.emails_enabled
   extra_shared_runners_minutes_limit = var.extra_shared_runners_minutes_limit
   ip_restriction_ranges              = var.ip_restriction_ranges
   lfs_enabled                        = var.lfs_enabled
