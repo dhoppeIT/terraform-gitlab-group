@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.1](https://gitlab.com/terraform-child-modules-48151/terraform-gitlab-group/compare/v1.1.0...v1.1.1) (2024-11-11)
+
+### Bug Fixes
+
+* **terraform:** Add support for GitLab 17.x ([170a76b](https://gitlab.com/terraform-child-modules-48151/terraform-gitlab-group/commit/170a76be645fab1464a9557862e897726d651108))
+
 ## [1.1.0](https://gitlab.com/terraform-child-modules-48151/terraform-gitlab-group/compare/v1.0.2...v1.1.0) (2024-04-22)
 
 
