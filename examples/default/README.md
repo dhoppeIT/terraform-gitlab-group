@@ -17,13 +17,13 @@ terraform apply
 :warning: This example may create resources that cost money. Execute the
 command `terraform destroy` when the resources are no longer needed.
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_gitlab"></a> [gitlab](#requirement\_gitlab) | ~> 16.0 |
+| <a name="requirement_gitlab"></a> [gitlab](#requirement\_gitlab) | ~> 17.0 |
 
 ## Providers
 
@@ -53,4 +53,4 @@ No inputs.
 | <a name="output_gitlab_group_id"></a> [gitlab\_group\_id](#output\_gitlab\_group\_id) | The ID of this resource |
 | <a name="output_gitlab_group_runners_token"></a> [gitlab\_group\_runners\_token](#output\_gitlab\_group\_runners\_token) | The group level registration token to use during runner setup |
 | <a name="output_gitlab_group_web_url"></a> [gitlab\_group\_web\_url](#output\_gitlab\_group\_web\_url) | Web URL of the group |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->
