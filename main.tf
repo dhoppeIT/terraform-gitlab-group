@@ -29,7 +29,7 @@ resource "gitlab_group" "this" {
   wiki_access_level                  = var.wiki_access_level
 
   dynamic "default_branch_protection_defaults" {
-    for_each = length(var.default_branch_protection_defaults) > 0 ? [var.default_branch_protection_defaults] : []
+    for_each = var.default_branch_protection_defaults
 
     content {
       allow_force_push           = lookup(default_branch_protection_defaults.value, "allow_force_push", false)
@@ -40,7 +40,7 @@ resource "gitlab_group" "this" {
   }
 
   dynamic "push_rules" {
-    for_each = length(var.push_rules) > 0 ? [var.push_rules] : []
+    for_each = var.push_rules
 
     content {
       author_email_regex            = lookup(push_rules.value, "author_email_regex", null)
