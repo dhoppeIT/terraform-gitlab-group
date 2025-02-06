@@ -47,10 +47,12 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_allowed_email_domains_list"></a> [allowed\_email\_domains\_list](#input\_allowed\_email\_domains\_list) | A list of email address domains to allow group access | `list(string)` | `[]` | no |
 | <a name="input_auto_devops_enabled"></a> [auto\_devops\_enabled](#input\_auto\_devops\_enabled) | Default to Auto DevOps pipeline for all projects within this group | `bool` | `false` | no |
 | <a name="input_avatar"></a> [avatar](#input\_avatar) | A local path to the avatar image to upload | `string` | `null` | no |
 | <a name="input_avatar_hash"></a> [avatar\_hash](#input\_avatar\_hash) | The hash of the avatar image | `string` | `null` | no |
-| <a name="input_default_branch_protection"></a> [default\_branch\_protection](#input\_default\_branch\_protection) | See https://docs.gitlab.com/ee/api/groups.html#options-for-default_branch_protection | `number` | `2` | no |
+| <a name="input_default_branch"></a> [default\_branch](#input\_default\_branch) | Initial default branch name | `string` | `null` | no |
+| <a name="input_default_branch_protection_defaults"></a> [default\_branch\_protection\_defaults](#input\_default\_branch\_protection\_defaults) | The default branch protection defaults | `list(string)` | `[]` | no |
 | <a name="input_description"></a> [description](#input\_description) | The group's description | `string` | `null` | no |
 | <a name="input_emails_enabled"></a> [emails\_enabled](#input\_emails\_enabled) | Enable email notifications | `bool` | `true` | no |
 | <a name="input_extra_shared_runners_minutes_limit"></a> [extra\_shared\_runners\_minutes\_limit](#input\_extra\_shared\_runners\_minutes\_limit) | Additional CI/CD minutes for this group | `number` | `null` | no |
@@ -61,8 +63,10 @@ No modules.
 | <a name="input_name"></a> [name](#input\_name) | The name of the group | `string` | n/a | yes |
 | <a name="input_parent_id"></a> [parent\_id](#input\_parent\_id) | ID of the parent group (creates a nested group) | `number` | `null` | no |
 | <a name="input_path"></a> [path](#input\_path) | The path of the group | `string` | n/a | yes |
+| <a name="input_permanently_remove_on_delete"></a> [permanently\_remove\_on\_delete](#input\_permanently\_remove\_on\_delete) | Whether the group should be permanently removed during a delete operation | `bool` | `false` | no |
 | <a name="input_prevent_forking_outside_group"></a> [prevent\_forking\_outside\_group](#input\_prevent\_forking\_outside\_group) | When enabled, users can not fork projects from this group to external namespaces | `bool` | `false` | no |
 | <a name="input_project_creation_level"></a> [project\_creation\_level](#input\_project\_creation\_level) | Determine if developers can create projects in the group | `string` | `"developer"` | no |
+| <a name="input_push_rules"></a> [push\_rules](#input\_push\_rules) | Push rules for the group | `list(string)` | `[]` | no |
 | <a name="input_request_access_enabled"></a> [request\_access\_enabled](#input\_request\_access\_enabled) | Allow users to request member access | `bool` | `true` | no |
 | <a name="input_require_two_factor_authentication"></a> [require\_two\_factor\_authentication](#input\_require\_two\_factor\_authentication) | Require all users in this group to setup Two-factor authentication | `bool` | `false` | no |
 | <a name="input_share_with_group_lock"></a> [share\_with\_group\_lock](#input\_share\_with\_group\_lock) | Prevent sharing a project with another group within this group | `bool` | `false` | no |

@@ -8,6 +8,12 @@ variable "path" {
   description = "The path of the group"
 }
 
+variable "allowed_email_domains_list" {
+  type        = list(string)
+  default     = []
+  description = "A list of email address domains to allow group access"
+}
+
 variable "auto_devops_enabled" {
   type        = bool
   default     = false
@@ -26,15 +32,16 @@ variable "avatar_hash" {
   description = "The hash of the avatar image"
 }
 
-variable "default_branch_protection" {
-  type        = number
-  default     = 2
-  description = "See https://docs.gitlab.com/ee/api/groups.html#options-for-default_branch_protection"
+variable "default_branch" {
+  type        = string
+  default     = null
+  description = "Initial default branch name"
+}
 
-  validation {
-    condition     = contains([0, 1, 2, 3, 4], var.default_branch_protection)
-    error_message = "Valid values are 0, 1, 2, 3, 4"
-  }
+variable "default_branch_protection_defaults" {
+  type        = list(string)
+  default     = []
+  description = "The default branch protection defaults"
 }
 
 variable "description" {
@@ -85,6 +92,12 @@ variable "parent_id" {
   description = "ID of the parent group (creates a nested group)"
 }
 
+variable "permanently_remove_on_delete" {
+  type        = bool
+  default     = false
+  description = "Whether the group should be permanently removed during a delete operation"
+}
+
 variable "prevent_forking_outside_group" {
   type        = bool
   default     = false
@@ -100,6 +113,12 @@ variable "project_creation_level" {
     condition     = contains(["noone", "maintainer", "developer"], var.project_creation_level)
     error_message = "Valid values are noone, maintainer, developer"
   }
+}
+
+variable "push_rules" {
+  type        = list(string)
+  default     = []
+  description = "Push rules for the group"
 }
 
 variable "request_access_enabled" {
