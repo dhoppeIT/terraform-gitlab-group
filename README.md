@@ -12,10 +12,10 @@ specify the required variables and run the command `terraform init`.
 ```hcl
 module "gitlab_group" {
   source  = "gitlab.com/terraform-child-modules-48151/terraform-gitlab-group/local"
-  version = "1.0.0"
+  version = "1.1.4"
 
   name = "Example (group)"
-  path = "example-group"
+  path = "example-group-48165"
 }
 ```
 
