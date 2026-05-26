@@ -8,10 +8,22 @@ variable "path" {
   description = "The path of the group"
 }
 
+variable "allow_merge_on_skipped_pipeline" {
+  type        = bool
+  default     = null
+  description = "Allow merging merge requests when the pipeline is skipped. Only applies when only_allow_merge_if_pipeline_succeeds is true. Premium and Ultimate only"
+}
+
 variable "allowed_email_domains_list" {
   type        = list(string)
   default     = []
   description = "A list of email address domains to allow group access"
+}
+
+variable "archive_on_destroy" {
+  type        = bool
+  default     = null
+  description = "Set to true to archive the group instead of deleting on destroy"
 }
 
 variable "auto_devops_enabled" {
@@ -29,7 +41,7 @@ variable "avatar" {
 variable "avatar_hash" {
   type        = string
   default     = null
-  description = "The hash of the avatar image"
+  description = "The hash of the avatar image. Use filesha256() whenever possible"
 }
 
 variable "default_branch" {
@@ -39,9 +51,15 @@ variable "default_branch" {
 }
 
 variable "default_branch_protection_defaults" {
-  type        = list(string)
-  default     = []
-  description = "The default branch protection defaults"
+  type = object({
+    allow_force_push             = optional(bool, false)
+    allowed_to_merge             = optional(list(string), [])
+    allowed_to_push              = optional(list(string), [])
+    code_owner_approval_required = optional(bool, false)
+    developer_can_initial_push   = optional(bool, false)
+  })
+  default     = null
+  description = "The default branch protection defaults for the group"
 }
 
 variable "description" {
@@ -59,19 +77,25 @@ variable "emails_enabled" {
 variable "extra_shared_runners_minutes_limit" {
   type        = number
   default     = null
-  description = "Additional CI/CD minutes for this group"
+  description = "Additional CI/CD minutes for this group. Can be set by administrators only"
 }
 
 variable "ip_restriction_ranges" {
   type        = list(string)
   default     = []
-  description = "A list of IP addresses or subnet masks to restrict group access"
+  description = "A list of IP addresses or subnet masks to restrict group access. Only allowed on top level groups"
 }
 
 variable "lfs_enabled" {
   type        = bool
   default     = true
   description = "Enable/disable Large File Storage (LFS) for the projects in this group"
+}
+
+variable "max_artifacts_size" {
+  type        = number
+  default     = null
+  description = "The maximum file size in megabytes for individual job artifacts"
 }
 
 variable "membership_lock" {
@@ -86,6 +110,18 @@ variable "mentions_disabled" {
   description = "Disable the capability of a group from getting mentioned"
 }
 
+variable "only_allow_merge_if_all_discussions_are_resolved" {
+  type        = bool
+  default     = null
+  description = "Only allow merging merge requests when all discussions are resolved. Premium and Ultimate only"
+}
+
+variable "only_allow_merge_if_pipeline_succeeds" {
+  type        = bool
+  default     = null
+  description = "Only allow merging merge requests if the pipeline succeeds. Premium and Ultimate only"
+}
+
 variable "parent_id" {
   type        = number
   default     = null
@@ -94,8 +130,8 @@ variable "parent_id" {
 
 variable "permanently_remove_on_delete" {
   type        = bool
-  default     = false
-  description = "Whether the group should be permanently removed during a delete operation"
+  default     = null
+  description = "Whether the group should be permanently removed during a delete operation. This only works with subgroups"
 }
 
 variable "prevent_forking_outside_group" {
@@ -104,20 +140,40 @@ variable "prevent_forking_outside_group" {
   description = "When enabled, users can not fork projects from this group to external namespaces"
 }
 
+variable "prevent_sharing_groups_outside_hierarchy" {
+  type        = bool
+  default     = false
+  description = "When enabled, users cannot invite other groups outside of the top-level group's hierarchy. Only available for top-level groups"
+}
+
 variable "project_creation_level" {
   type        = string
   default     = "developer"
   description = "Determine if developers can create projects in the group"
 
   validation {
-    condition     = contains(["noone", "maintainer", "developer"], var.project_creation_level)
-    error_message = "Valid values are noone, maintainer, developer"
+    condition     = contains(["noone", "owner", "maintainer", "developer", "administrator"], var.project_creation_level)
+    error_message = "Valid values are noone, owner, maintainer, developer, administrator"
   }
 }
 
 variable "push_rules" {
-  type        = list(string)
-  default     = []
+  type = object({
+    author_email_regex            = optional(string)
+    branch_name_regex             = optional(string)
+    commit_committer_check        = optional(bool)
+    commit_committer_name_check   = optional(bool)
+    commit_message_negative_regex = optional(string)
+    commit_message_regex          = optional(string)
+    deny_delete_tag               = optional(bool)
+    file_name_regex               = optional(string)
+    max_file_size                 = optional(number)
+    member_check                  = optional(bool)
+    prevent_secrets               = optional(bool)
+    reject_non_dco_commits        = optional(bool)
+    reject_unsigned_commits       = optional(bool)
+  })
+  default     = null
   description = "Push rules for the group"
 }
 
@@ -142,13 +198,13 @@ variable "share_with_group_lock" {
 variable "shared_runners_minutes_limit" {
   type        = number
   default     = null
-  description = "Maximum number of monthly CI/CD minutes for this group"
+  description = "Maximum number of monthly CI/CD minutes for this group. Can be set by administrators only"
 }
 
 variable "shared_runners_setting" {
   type        = string
   default     = "enabled"
-  description = "Enable or disable shared runners for a group’s subgroups and projects"
+  description = "Enable or disable shared runners for a group's subgroups and projects"
 
   validation {
     condition     = contains(["enabled", "disabled_and_overridable", "disabled_and_unoverridable", "disabled_with_override"], var.shared_runners_setting)
@@ -187,7 +243,7 @@ variable "visibility_level" {
 variable "wiki_access_level" {
   type        = string
   default     = "enabled"
-  description = "The group's wiki access level"
+  description = "The group's wiki access level. Only available on Premium and Ultimate plans"
 
   validation {
     condition     = contains(["disabled", "private", "enabled"], var.wiki_access_level)
